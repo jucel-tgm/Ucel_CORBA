@@ -1,26 +1,26 @@
 CXX            	= /usr/bin/g++
 CPPFLAGS      	= -g -c
 LDFLAGS       	= -g
-OMNI_HOME     	= /home/mike/opt/omniORB/build
+OMNI_HOME     	= /home/mike/opt/omniORB
 OMNIIDL       	= $(OMNI_HOME)/build/bin/omniidl
 LIBS          	=  -lomniORB4 -lomnithread -lomniDynamic4
 OBJECTS       	= echo_callbackSK.o cb_server.o
 IDL_DIR		= ../idl
-IDL_FILE	= $(IDL_DIR)/echo.idl
+IDL_FILE	= $(IDL_DIR)/echo_callback.idl
 LD_LIBRARY_PATH =  $(OMNI_HOME)/lib
 all server: $(OBJECTS)
-	$(CXX) $(LDFLAGS) -o server server.o echoSK.o $(LIBS)
+	$(CXX) $(LDFLAGS) -o cb_server cb_server.o echo_callbackSK.o $(LIBS)
 
-server.o: server.cc
-	$(CXX) $(CPPFLAGS) server.cc -I.
+cb_server.o: cb_server.cc
+	$(CXX) $(CPPFLAGS) cb_server.cc -I.
 
-echoSK.o: echoSK.cc echo.hh
-	$(CXX) $(CPPFLAGS) echoSK.cc -I.
+echo_callbackSK.o: echo_callbackSK.cc echo_callback.hh
+	$(CXX) $(CPPFLAGS) echo_callbackSK.cc -I.
 
-echoSK.cc: $(IDL_FILE)
+echo_callbackSK.cc: $(IDL_FILE)
 	$(OMNIIDL) -bcxx $(IDL_FILE)
 
-run: server
+run: cb_server
 	# Start Naming service with command 'omniNames -start -always' as root
 	./server -ORBInitRef NameService=corbaname::localhost
 
@@ -28,4 +28,4 @@ clean clean-up:
 	rm -rf *.o
 	rm -rf *.hh
 	rm -rf *SK.cc
-	rm -rf server
+	rm -rf cb_server
