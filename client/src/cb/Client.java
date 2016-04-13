@@ -55,6 +55,7 @@ public class Client extends CallBackPOA {
 			e.printStackTrace();
 		}
 	}
+	@Override
 	public void call_back (String msg){
 		System.out.println("Client Callback - Methode hat folgende Nachricht erhalten: " +msg);
 	}
