@@ -266,3 +266,4 @@ bindObjectToName(CORBA::ORB_ptr orb, CORBA::Object_ptr objref)
   }
   return 1;
 }
+

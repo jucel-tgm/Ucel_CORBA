@@ -22,7 +22,7 @@ echo_callbackSK.cc: $(IDL_FILE)
 
 run: cb_server
 	# Start Naming service with command 'omniNames -start -always' as root
-	./server -ORBInitRef NameService=corbaname::localhost
+	./cb_server -ORBInitRef NameService=corbaname::localhost
 
 clean clean-up:
 	rm -rf *.o

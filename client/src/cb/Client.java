@@ -4,6 +4,16 @@ import org.omg.CosNaming.*;
 import org.omg.CORBA.*;
 import org.omg.CORBA.Object;
 import org.omg.PortableServer.POA;
+import org.omg.BiDirPolicy.BIDIRECTIONAL_POLICY_TYPE;
+import org.omg.BiDirPolicy.BOTH;
+import org.omg.BiDirPolicy.BidirectionalPolicyValueHelper;
+import org.omg.CORBA.Any;
+import org.omg.CORBA.Policy;
+import org.omg.PortableServer.IdAssignmentPolicyValue;
+import org.omg.PortableServer.ImplicitActivationPolicyValue;
+import org.omg.PortableServer.LifespanPolicyValue;
+import org.omg.PortableServer.POA;
+
 /**
  * @author Hagen Aad Fock <hagen.fock@gmail.com>
  * @version 13.03.2015
