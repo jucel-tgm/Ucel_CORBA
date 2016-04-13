@@ -13,7 +13,8 @@ static int            dying = 0;
 static int            num_active_servers = 0;
 static omni_mutex     mu;
 static omni_condition sigobj(&mu);
-
+static CORBA::Boolean bindObjectToName(CORBA::ORB_ptr orb, CORBA::Object_ptr objref);
+		
 //////////////////////////////////////////////////////////////////////
 
 // A thread object used to server clients registered
@@ -151,6 +152,8 @@ int main(int argc, char** argv)
 
       server_i* myserver = new server_i();
       obj = myserver->_this();             // *implicit activation*
+     if(!bindObjectToName(orb,obj))
+	 return 1;
       myserver->_remove_ref();
 
       CORBA::String_var sior(orb->object_to_string(obj));
